@@ -13,6 +13,8 @@ import * as utils from "../../utils/utils";
 
 export * from "./frame-common";
 
+const majorVersion = utils.ios.MajorVersion;
+
 const ENTRY = "_entry";
 const NAV_DEPTH = "_navDepth";
 const TRANSITION = "_transition";
@@ -38,11 +40,13 @@ export class Frame extends FrameBase {
     }
 
     public setCurrent(entry: BackstackEntry, isBack: boolean): void {
-        if (entry !== this._currentEntry) {
+        const current = this._currentEntry;
+        const currentEntryChanged = current !== entry;
+        if (currentEntryChanged) {
             this._updateBackstack(entry, isBack);
-        }
 
-        super.setCurrent(entry, isBack);
+            super.setCurrent(entry, isBack);
+        }
     }
 
     @profile
@@ -85,6 +89,13 @@ export class Frame extends FrameBase {
 
         backstackEntry[NAV_DEPTH] = navDepth;
         viewController[ENTRY] = backstackEntry;
+
+        if (!animated && majorVersion > 10) {
+            // Reset back button title before pushing view controller to prevent
+            // displaying default 'back' title (when NavigaitonButton custom title is set).
+            let barButtonItem = UIBarButtonItem.alloc().initWithTitleStyleTargetAction("", UIBarButtonItemStyle.Plain, null, null);
+            viewController.navigationItem.backBarButtonItem = barButtonItem;
+        }
 
         // First navigation.
         if (!this._currentEntry) {
