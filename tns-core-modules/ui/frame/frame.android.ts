@@ -204,8 +204,8 @@ export class Frame extends FrameBase {
         // however, we must add a fragment.isAdded() guard as our logic will try to 
         // explicitly remove the already removed child fragment causing an 
         // IllegalStateException: Fragment has not been attached yet.
-        if (!this._currentEntry || 
-            !this._currentEntry.fragment || 
+        if (!this._currentEntry ||
+            !this._currentEntry.fragment ||
             !this._currentEntry.fragment.isAdded()) {
             return;
         }
@@ -423,6 +423,7 @@ export class Frame extends FrameBase {
         }
 
         this._android.rootViewGroup = null;
+        this._removeFromFrameStack();
         super.disposeNativeView();
     }
 
@@ -435,15 +436,24 @@ export class Frame extends FrameBase {
     }
 
     public _getNavBarVisible(page: Page): boolean {
-        if (page.actionBarHidden !== undefined) {
-            return !page.actionBarHidden;
+        switch (this.actionBarVisibility) {
+            case "never":
+                return false;
+            
+            case "always":
+                return true;
+            
+            default:
+                if (page.actionBarHidden !== undefined) {
+                    return !page.actionBarHidden;
+                }
+        
+                if (this._android && this._android.showActionBar !== undefined) {
+                    return this._android.showActionBar;
+                }
+        
+                return true;
         }
-
-        if (this._android && this._android.showActionBar !== undefined) {
-            return this._android.showActionBar;
-        }
-
-        return true;
     }
 
     public _saveFragmentsState(): void {
