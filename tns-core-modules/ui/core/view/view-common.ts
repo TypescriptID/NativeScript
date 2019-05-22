@@ -5,7 +5,7 @@ import {
 } from ".";
 
 import {
-    ViewBase, Property, booleanConverter, eachDescendant, EventData, layout,
+    ViewBase, Property, booleanConverter, EventData, layout,
     getEventOrGestureName, traceEnabled, traceWrite, traceCategories,
     InheritedProperty, ShowModalOptions
 } from "../view-base";
@@ -350,11 +350,7 @@ export abstract class ViewCommon extends ViewBase implements ViewDefinition {
                     }
                 }
 
-                if (isAndroid || (parent.viewController && parent.viewController.presentedViewController)) {
-                    that._hideNativeModalView(parent, whenClosedCallback);
-                } else {
-                    whenClosedCallback();
-                }
+                that._hideNativeModalView(parent, whenClosedCallback);
             }
         };
     }
