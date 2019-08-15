@@ -85,7 +85,7 @@ function initializeNativeClasses() {
         public onCreateView(inflater: android.view.LayoutInflater, container: android.view.ViewGroup, savedInstanceState: android.os.Bundle): android.view.View {
             const tabItem = this.tab.items[this.index];
 
-            return tabItem.view.nativeViewProtected;
+            return tabItem.nativeViewProtected;
         }
     }
 
@@ -211,11 +211,10 @@ function createTabItemSpec(tabStripItem: TabStripItem): org.nativescript.widgets
     return tabItemSpec;
 }
 
-function setElevation(grid: org.nativescript.widgets.GridLayout, bottomNavigationBar: org.nativescript.widgets.BottomNavigationBar) {
+function setElevation(bottomNavigationBar: org.nativescript.widgets.BottomNavigationBar) {
     const compat = <any>androidx.core.view.ViewCompat;
     if (compat.setElevation) {
         const val = DEFAULT_ELEVATION * layout.getDisplayDensity();
-        compat.setElevation(grid, val);
         compat.setElevation(bottomNavigationBar, val);
     }
 }
@@ -288,7 +287,7 @@ export class BottomNavigation extends TabNavigationBase {
         nativeView.addView(bottomNavigationBar);
         (<any>nativeView).bottomNavigationBar = bottomNavigationBar;
 
-        setElevation(nativeView, bottomNavigationBar);
+        setElevation(bottomNavigationBar);
 
         const primaryColor = ad.resources.getPaletteColor(PRIMARY_COLOR, context);
         if (primaryColor) {
@@ -315,7 +314,7 @@ export class BottomNavigation extends TabNavigationBase {
 
         this._bottomNavigationBar = (<any>nativeView).bottomNavigationBar;
         (<any>this._bottomNavigationBar).owner = this;
-
+        
         if (this.tabStrip) {
             this.tabStrip.setNativeView(this._bottomNavigationBar);
         }
@@ -341,12 +340,12 @@ export class BottomNavigation extends TabNavigationBase {
         toUnload.forEach(index => {
             const item = items[index];
             if (items[index]) {
-                item.unloadView(item.view);
+                item.unloadView(item.content);
             }
         });
 
         const newItem = items[newIndex];
-        const selectedView = newItem && newItem.view;
+        const selectedView = newItem && newItem.content;
         if (selectedView instanceof Frame) {
             selectedView._pushInFrameStackRecursive();
         }
@@ -354,7 +353,7 @@ export class BottomNavigation extends TabNavigationBase {
         toLoad.forEach(index => {
             const item = items[index];
             if (this.isLoaded && items[index]) {
-                item.loadView(item.view);
+                item.loadView(item.content);
             }
         });
     }
@@ -362,8 +361,12 @@ export class BottomNavigation extends TabNavigationBase {
     public onLoaded(): void {
         super.onLoaded();
 
-        const items = this.tabStrip ? this.tabStrip.items : null;
-        this.setTabStripItems(items);
+        if (this.tabStrip) {
+            this.setTabStripItems(this.tabStrip.items);
+        } else {
+            // manually set the visibility, so that the grid layout remeasures
+            this._bottomNavigationBar.setVisibility(android.view.View.GONE);
+        }
 
         if (this._attachedToWindow) {
             this.changeTab(this.selectedIndex);
@@ -386,7 +389,9 @@ export class BottomNavigation extends TabNavigationBase {
     public onUnloaded(): void {
         super.onUnloaded();
 
-        this.setTabStripItems(null);
+        if (this.tabStrip) {
+            this.setTabStripItems(null);
+        }
 
         const fragmentToDetach = this._currentFragment;
         if (fragmentToDetach) {
@@ -637,7 +642,11 @@ export class BottomNavigation extends TabNavigationBase {
         //     traceWrite("TabView this._viewPager.setCurrentItem(" + value + ", " + smoothScroll + ");", traceCategory);
         // }
 
-        this._bottomNavigationBar.setSelectedPosition(value);
+        if (this.tabStrip) {
+            this._bottomNavigationBar.setSelectedPosition(value);
+        } else {
+            this.changeTab(value);
+        }
     }
 
     [itemsProperty.getDefault](): TabContentItem[] {
