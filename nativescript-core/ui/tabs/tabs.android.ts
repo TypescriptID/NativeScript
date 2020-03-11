@@ -373,6 +373,7 @@ export class Tabs extends TabsBase {
     private _pagerAdapter: androidx.viewpager.widget.PagerAdapter;
     private _androidViewId: number = -1;
     public _originalBackground: any;
+    private _textTransform: TextTransform = "uppercase";
 
     constructor() {
         super();
@@ -637,6 +638,18 @@ export class Tabs extends TabsBase {
         });
     }
 
+    private getItemLabelTextTransform(tabStripItem: TabStripItem): TextTransform {
+        const nestedLabel = tabStripItem.label;
+        let textTransform: TextTransform = null;
+        if (nestedLabel && nestedLabel.style.textTransform !== "initial") {
+            textTransform = nestedLabel.style.textTransform;
+        } else if (tabStripItem.style.textTransform !== "initial") {
+            textTransform = tabStripItem.style.textTransform;
+        }
+
+        return textTransform || this._textTransform;
+    }
+
     private createTabItemSpec(tabStripItem: TabStripItem): org.nativescript.widgets.TabItemSpec {
         const tabItemSpec = new org.nativescript.widgets.TabItemSpec();
 
@@ -645,10 +658,8 @@ export class Tabs extends TabsBase {
             let title = nestedLabel.text;
 
             // TEXT-TRANSFORM
-            const textTransform = nestedLabel.style.textTransform;
-            if (textTransform) {
-                title = getTransformedText(title, textTransform);
-            }
+            const textTransform = this.getItemLabelTextTransform(tabStripItem);
+            title = getTransformedText(title, textTransform);
             tabItemSpec.title = title;
 
             // BACKGROUND-COLOR
@@ -689,6 +700,9 @@ export class Tabs extends TabsBase {
 
     private getIcon(tabStripItem: TabStripItem): android.graphics.drawable.BitmapDrawable {
         const iconSource = tabStripItem.image && tabStripItem.image.src;
+        if (!iconSource) {
+            return null;
+        }
 
         let is: ImageSource;
         if (isFontIconURI(iconSource)) {
@@ -819,14 +833,38 @@ export class Tabs extends TabsBase {
     }
 
     public setTabBarItemFontInternal(tabStripItem: TabStripItem, value: Font): void {
-        tabStripItem.nativeViewProtected.setTextSize(value.fontSize);
+        if (value.fontSize) {
+            tabStripItem.nativeViewProtected.setTextSize(value.fontSize);
+        }
         tabStripItem.nativeViewProtected.setTypeface(value.getAndroidTypeface());
+    }
+
+    public getTabBarItemTextTransform(tabStripItem: TabStripItem): TextTransform {
+        return this.getItemLabelTextTransform(tabStripItem);
     }
 
     public setTabBarItemTextTransform(tabStripItem: TabStripItem, value: TextTransform): void {
         const nestedLabel = tabStripItem.label;
         const title = getTransformedText(nestedLabel.text, value);
         tabStripItem.nativeViewProtected.setText(title);
+    }
+
+    public getTabBarTextTransform(): TextTransform {
+        return this._textTransform;
+    }
+
+    public setTabBarTextTransform(value: TextTransform): void {
+        let items = this.tabStrip && this.tabStrip.items;
+        if (items) {
+            items.forEach((tabStripItem) => {
+                if (tabStripItem.label && tabStripItem.nativeViewProtected) {
+                    const nestedLabel = tabStripItem.label;
+                    const title = getTransformedText(nestedLabel.text, value);
+                    tabStripItem.nativeViewProtected.setText(title);
+                }
+            });
+        }
+        this._textTransform = value;
     }
 
     [selectedIndexProperty.setNative](value: number) {
