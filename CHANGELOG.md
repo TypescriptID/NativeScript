@@ -1,3 +1,92 @@
+# [7.0.0](https://github.com/NativeScript/NativeScript/compare/6.5.15...7.0.0) (2020-09-03)
+
+
+### Bug Fixes
+
+* **ios:** stop using artificial state handler via animated setter on uiviewcontroller ([#8797](https://github.com/NativeScript/NativeScript/issues/8797)) ([967d652](https://github.com/NativeScript/NativeScript/commit/967d652c61fbeed6c7e8bd568c893d40308b5b58))
+* **webpack:** don't require ts transformer unless processing ts file ([fa9f095](https://github.com/NativeScript/NativeScript/commit/fa9f0957b86624532c4b18a6510bdf405ecbe931))
+
+
+### Features
+
+* **core:** es2017 targeting ([020ad4d](https://github.com/NativeScript/NativeScript/commit/020ad4da37f551e934cd6054ca983ab5083a4042))
+* **core:** nativescript.config and webpack updates ([#8801](https://github.com/NativeScript/NativeScript/issues/8801)) ([54cce4f](https://github.com/NativeScript/NativeScript/commit/54cce4f20c142397fd31bba3300c27a3d7459420))
+* add enableMultithreadedJavascript flag to config definition ([4abfc8a](https://github.com/NativeScript/NativeScript/commit/4abfc8a370e3402e9566de078473f9e8deceff8b))
+* **webpack:** using new nativescript.config ([#8796](https://github.com/NativeScript/NativeScript/issues/8796)) ([33a703e](https://github.com/NativeScript/NativeScript/commit/33a703e1291b242fe7b218aa1e6bd746a5217f88))
+
+
+
+## [6.5.15](https://github.com/NativeScript/NativeScript/compare/6.5.13...6.5.15) (2020-08-12)
+
+
+### Bug Fixes
+
+* **android:** list picker getTextColor api level issue ([#8755](https://github.com/NativeScript/NativeScript/issues/8755)) ([5c076de](https://github.com/NativeScript/NativeScript/commit/5c076de8560f71b59cf34124f47ebeafdc902658))
+
+
+
+## [6.5.13](https://github.com/NativeScript/NativeScript/compare/6.5.12...6.5.13) (2020-08-07)
+
+
+### Bug Fixes
+
+* **android:** 'isEnabled' now works properly for SegmentedBar ([#8711](https://github.com/NativeScript/NativeScript/issues/8711)) ([0850252](https://github.com/NativeScript/NativeScript/commit/08502527eb25d074d5e29ede506f5fb88f47d088))
+* **android:** line-height ([#8751](https://github.com/NativeScript/NativeScript/issues/8751)) ([4708ff4](https://github.com/NativeScript/NativeScript/commit/4708ff4e680669c3747837be036c6cb86b4b46c6))
+
+
+### Features
+
+* **ios:** dialog size can now use CSS or attribute like android ([#8710](https://github.com/NativeScript/NativeScript/issues/8710)) ([fc37b95](https://github.com/NativeScript/NativeScript/commit/fc37b958fe4fc9f83cace2965f73a81c802cac75))
+
+
+
+## [6.5.12](https://github.com/NativeScript/NativeScript/compare/6.5.11...6.5.12) (2020-07-21)
+
+
+### Bug Fixes
+
+* **ios:** actionbar show/hide should trigger page layout ([#8726](https://github.com/NativeScript/NativeScript/issues/8726)) ([09d866c](https://github.com/NativeScript/NativeScript/commit/09d866cfcda7c0ea42622201eac50a1b8691a26b))
+
+
+
+## [6.5.11](https://github.com/NativeScript/NativeScript/compare/6.5.10...6.5.11) (2020-07-20)
+
+
+### Bug Fixes
+
+* **android:** add check in ad.dismissSoftInput to make sure the dismissed nativeView has focus at that moment ([#8720](https://github.com/NativeScript/NativeScript/issues/8720)) ([4479096](https://github.com/NativeScript/NativeScript/commit/4479096b5631c0f3d311d8afef73a24dfb082c8f))
+
+
+
+## [6.5.10](https://github.com/NativeScript/NativeScript/compare/6.5.9...6.5.10) (2020-07-11)
+
+
+### Features
+
+* **tabs:** add animationEnabled property ([#8704](https://github.com/NativeScript/NativeScript/issues/8704)) ([36aa181](https://github.com/NativeScript/NativeScript/commit/36aa181185cc097f5281cb113cd87aca183ee659))
+
+
+
+## [6.5.9](https://github.com/NativeScript/NativeScript/compare/6.5.8...6.5.9) (2020-07-07)
+
+
+### Bug Fixes
+
+* **bindable:** parent referenced expression-values now load properly using an update call ([#8670](https://github.com/NativeScript/NativeScript/issues/8670)) ([6b0028a](https://github.com/NativeScript/NativeScript/commit/6b0028afd7b554914b039cdf371e8e30f6e02dac)), closes [#8666](https://github.com/NativeScript/NativeScript/issues/8666) [#6981](https://github.com/NativeScript/NativeScript/issues/6981) [#5054](https://github.com/NativeScript/NativeScript/issues/5054)
+* **scroll-view:** android 'isScrollEnabled' will apply if changed while gesture is underway ([#8695](https://github.com/NativeScript/NativeScript/issues/8695)) ([02ec7f1](https://github.com/NativeScript/NativeScript/commit/02ec7f104d327df53df687ddd1b8ac5b1cdc04ba))
+* **snapshots:** android is not defined ([#8691](https://github.com/NativeScript/NativeScript/issues/8691)) ([a8bbd7c](https://github.com/NativeScript/NativeScript/commit/a8bbd7c1e580e77e7ad5ddc7be6845e3d8fb02de))
+* **text-view:** only reload text if hint is showing on ios ([#8662](https://github.com/NativeScript/NativeScript/issues/8662)) ([ec17727](https://github.com/NativeScript/NativeScript/commit/ec17727e91f7a3209ada2c7de0bcf59c98c4e62a))
+
+
+### Features
+
+* **connectivity:** getActiveNetworkInfo and NetworkInfo modern compliance [#8580](https://github.com/NativeScript/NativeScript/issues/8580) ([#8652](https://github.com/NativeScript/NativeScript/issues/8652)) ([635f31f](https://github.com/NativeScript/NativeScript/commit/635f31f81f7826112142c707aff2a66c2b480b0e))
+* **dialog:** ios destructive style from options ([#8676](https://github.com/NativeScript/NativeScript/issues/8676)) ([bb531ce](https://github.com/NativeScript/NativeScript/commit/bb531ce71028f9c4fd4d753df16c82104f158e35))
+* **ImageSource:** resize method ([#8678](https://github.com/NativeScript/NativeScript/issues/8678)) ([bd12baf](https://github.com/NativeScript/NativeScript/commit/bd12bafb4aae8f1c523be4c7e04fa73722092304))
+* **text-view:** allow easy subclassing on ios ([#8663](https://github.com/NativeScript/NativeScript/issues/8663)) ([7d36447](https://github.com/NativeScript/NativeScript/commit/7d364474c23e17acf7696f159d3945d8a73d63e6))
+
+
+
 ## [6.5.8](https://github.com/NativeScript/NativeScript/compare/6.5.7...6.5.8) (2020-06-20)
 
 
