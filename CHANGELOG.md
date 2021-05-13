@@ -1,3 +1,56 @@
+## [8.0.5](https://github.com/NativeScript/NativeScript/compare/8.0.4-core...8.0.5) (2021-05-10)
+
+
+### Bug Fixes
+
+* **android:** image asset handling regarding requestLegacyExternalStorage ([#9373](https://github.com/NativeScript/NativeScript/issues/9373)) ([f311151](https://github.com/NativeScript/NativeScript/commit/f3111514960ada615a69418b906620a638f8f476))
+
+
+### Features
+
+* **docs:** typedoc api reference ([#9378](https://github.com/NativeScript/NativeScript/issues/9378)) ([6d91c2a](https://github.com/NativeScript/NativeScript/commit/6d91c2a0195e07c182d2fccfb9c6f7d783acc4b7))
+
+
+
+## [8.0.4](https://github.com/NativeScript/NativeScript/compare/8.0.3-core...8.0.4) (2021-05-05)
+
+
+### Bug Fixes
+
+* **core:** typings for showModal correction ([#9374](https://github.com/NativeScript/NativeScript/issues/9374)) ([9ec4042](https://github.com/NativeScript/NativeScript/commit/9ec404225ef0cff5f82d759fcdc7b85952e65c0d))
+
+
+### Features
+
+* add additional android global methods ([#9365](https://github.com/NativeScript/NativeScript/issues/9365)) ([a6cb46d](https://github.com/NativeScript/NativeScript/commit/a6cb46dac2d671221d9c0e972e8db89961b3e7c2))
+
+
+
+## [8.0.3](https://github.com/NativeScript/NativeScript/compare/8.0.2-core...8.0.3) (2021-04-24)
+
+
+### Bug Fixes
+
+* **core:** protected class getter/setter webpack issue ([6076047](https://github.com/NativeScript/NativeScript/commit/6076047c4fa557e2eb1217e174c4b700ca4ab61c))
+* **core:** typings issue around Trace.categories.All ([27c545d](https://github.com/NativeScript/NativeScript/commit/27c545db00bb57a8989612002aba859ff43581f2))
+
+
+
+## [8.0.2](https://github.com/NativeScript/NativeScript/compare/8.0.1-core...8.0.2) (2021-04-20)
+
+
+### Bug Fixes
+
+* **a11y:** Accessibility breaks limiting metadata ([#9332](https://github.com/NativeScript/NativeScript/issues/9332)) ([cbdff1f](https://github.com/NativeScript/NativeScript/commit/cbdff1f1550a4e7cf06ccd4f01c5cd743c68e265))
+* **a11y:** ios voiceover crash during touch ([#9318](https://github.com/NativeScript/NativeScript/issues/9318)) ([9a407ce](https://github.com/NativeScript/NativeScript/commit/9a407ce98964832c52cd51dc0ab60662fc65abb5))
+
+
+### Features
+
+* **text-base:** allow subclass to override createFormattedTextNative ([#9334](https://github.com/NativeScript/NativeScript/issues/9334)) ([b29e145](https://github.com/NativeScript/NativeScript/commit/b29e1452bda27183993c2f27ab13f95d9da5ceee))
+
+
+
 ## [8.0.1](https://github.com/NativeScript/NativeScript/compare/8.0.0-core...8.0.1) (2021-04-07)
 
 
